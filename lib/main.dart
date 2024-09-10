@@ -15,11 +15,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+    final AudioPlayer _audioPlayer = AudioPlayer();  // Create an instance of AudioPlayer
+
   // This widget is the root of your application.
 /////////////////////////////////////////////////////////
-  void playmusic(int number) {
-    final player = AudioCache();
-    player.play('note$number.wav');
+///
+void playmusic(int number) async {
+    // Replace with the correct path to your asset (ensure the audio files are in the assets folder)
+    String audioPath = 'note$number.wav';
+
+    // Play the audio file
+    await _audioPlayer.play(AssetSource(audioPath));
   }
 
   bool isvisible = true;

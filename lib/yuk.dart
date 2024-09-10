@@ -14,7 +14,7 @@ class yuk extends StatefulWidget {
 }
 
 int _currentindex = 0; //to know which page we are
-List<Widget> _childern = [home(), secondpage(), profile()];
+List<Widget> _childern = [home(), SecondPage(), profile()];
 
 class _yukState extends State<yuk> {
   @override

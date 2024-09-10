@@ -3,28 +3,34 @@ import 'package:english_words/english_words.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
 
-class secondpage extends StatefulWidget {
-  secondpage({Key? key}) : super(key: key);
+class SecondPage extends StatefulWidget {
+  SecondPage({Key? key}) : super(key: key);
 
   @override
-  State<secondpage> createState() => _secondpageState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
-void playmusic(int number) {
-  final player = AudioCache();
-  player.play('note$number.wav');
-}
+class _SecondPageState extends State<SecondPage> {
+  final AudioPlayer _audioPlayer = AudioPlayer(); // Use AudioPlayer
 
-void bottom(int num) {
-  ElevatedButton(child: Text('sound$num'), onPressed: () {});
-}
+  void playMusic(int number) async {
+    // Make sure your audio files are placed in the assets folder
+    String audioPath = 'assets/note$number.wav';
 
-final _controller1 = TextEditingController();
-double height = 80;
-double width = 400;
+    // Play the audio file from the assets folder
+    await _audioPlayer.play(AssetSource(audioPath));
+  }
 
-class _secondpageState extends State<secondpage> {
-  String metext = '';
+  final _controller1 = TextEditingController();
+  double height = 80;
+  double width = 400;
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose(); // Dispose of AudioPlayer when not needed
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,23 +39,6 @@ class _secondpageState extends State<secondpage> {
       },
       child: SafeArea(
         child: Scaffold(
-          // appBar:  AppBar(
-
-          //   centerTitle: false,
-          //   title: Row(
-          //     mainAxisAlignment: MainAxisAlignment.end,
-          //     children: [
-          //       Text(
-          //         'Yukesh',
-          //         textAlign: TextAlign.right,
-          //         style: TextStyle(
-          //           color: Colors.black,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          //   backgroundColor: Color.fromARGB(255, 226, 241, 86),
-          // ),
           backgroundColor: Colors.white10,
           body: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -63,21 +52,16 @@ class _secondpageState extends State<secondpage> {
                         child: TextField(
                           controller: _controller1,
                           decoration: InputDecoration(
-                              prefixIcon: IconButton(
-                                alignment: Alignment.centerLeft,
-                                onPressed: () {},
-                                icon: Icon(Icons.search),
-                              ),
-                              // suffixIcon: IconButton(
-                              //   onPressed: () {
-                              //     Container(
-                              //       child: Text(_controller1.text),
-                              //     );
-                              //   },
-                              // ),
-                              labelText: ('Search'),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20))),
+                            prefixIcon: IconButton(
+                              alignment: Alignment.centerLeft,
+                              onPressed: () {},
+                              icon: Icon(Icons.search),
+                            ),
+                            labelText: ('Search'),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -86,52 +70,20 @@ class _secondpageState extends State<secondpage> {
                     ),
                   ),
                   Container(
-                    child: Text(metext = _controller1.text.toString()),
+                    child: Text(_controller1.text.toString()),
                   ),
-
-                  // ElevatedButton(
-                  //   child: Text('sound-1'),
-                  //   onPressed: () {
-                  //     playmusic(1);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   child: Text('sound-2'),
-                  //   onPressed: () {
-                  //     playmusic(2);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   child: Text('sound-3'),
-                  //   onPressed: () {
-                  //     playmusic(3);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   child: Text('sound-4'),
-                  //   onPressed: () {
-                  //     playmusic(4);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   child: Text('sound-5'),
-                  //   onPressed: () {
-                  //     playmusic(5);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   child: Text('sound-6'),
-                  //   onPressed: () {
-                  //     playmusic(6);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   child: Text('sound-7'),
-                  //   onPressed: () {
-                  //     playmusic(7);
-                  //   },
-                  // ), Padding(
-
+                  ElevatedButton(
+                    child: Text('Play Sound 1'),
+                    onPressed: () {
+                      playMusic(1); // Play the first note
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('Play Sound 2'),
+                    onPressed: () {
+                      playMusic(2); // Play the second note
+                    },
+                  ),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
@@ -139,25 +91,13 @@ class _secondpageState extends State<secondpage> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                            'https://c4.wallpaperflare.com/wallpaper/695/331/660/digital-art-artwork-women-cityscape-wallpaper-preview.jpg'),
+                          'https://c4.wallpaperflare.com/wallpaper/695/331/660/digital-art-artwork-women-cityscape-wallpaper-preview.jpg',
+                        ),
                       ),
                     ),
                     height: 330,
                     width: 380,
                   ),
-
-                  // ListView.builder(
-                  //   itemCount: 10,
-                  //   itemBuilder: ((context, index) {
-                  //   return ListTile(
-                  //     subtitle: Text('$index'),
-                  //     title: Text('Text'),
-                  //   );
-                  // }))
-                  // Container(
-                  //   child: Image.network(
-                  //       'https://c4.wallpaperflare.com/wallpaper/295/163/719/anime-anime-boys-picture-in-picture-kimetsu-no-yaiba-kamado-tanjir%C5%8D-hd-wallpaper-preview.jpg'),
-                  // ),
                 ],
               ),
             ),

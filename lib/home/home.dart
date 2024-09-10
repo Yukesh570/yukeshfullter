@@ -9,8 +9,6 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   void playmusic(int number) {
-    final player = AudioCache();
-    player.play('note$number.wav');
   }
 
   var sweta = Colors.black;
